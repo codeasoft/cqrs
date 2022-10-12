@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Bus;
 
-use Codea\Cqrs\QueryBus;
 use Codea\Cqrs\Query;
+use Codea\Cqrs\QueryBus;
 use Codea\Cqrs\Result;
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
