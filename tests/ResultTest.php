@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Test;
 
-use Codea\Messaging\Cqrs\Result;
+use Codea\Cqrs\Result;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
@@ -37,7 +37,7 @@ final class ResultTest extends TestCase
         );
     }
 
-    public function testItHasErrorIfItFailed(): void
+    public function testItHasErrorsIfItFailed(): void
     {
         $result = new Result(
             id: Uuid::fromString(self::ID),
@@ -47,7 +47,7 @@ final class ResultTest extends TestCase
             ],
         );
 
-        $this->assertTrue($result->isFailed());
+        $this->assertTrue($result->isFailure());
         $this->assertCount(1, $result->errors);
     }
 
@@ -61,7 +61,7 @@ final class ResultTest extends TestCase
             ],
         );
 
-        $this->assertTrue($result->isSucceeded());
+        $this->assertTrue($result->isSuccess());
         $this->assertCount(1, $result->payload);
     }
 }
