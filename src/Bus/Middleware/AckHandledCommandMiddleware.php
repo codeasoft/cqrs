@@ -35,6 +35,6 @@ final class AckHandledCommandMiddleware implements Middleware
                 ) : $envelope;
         }
 
-        return $message;
+        return $envelope;
     }
 }
