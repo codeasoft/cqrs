@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Bus;
 
-use Codea\Cqrs\Messaging\QueryBus;
+use Codea\Cqrs\QueryBus;
 use Codea\Cqrs\Query;
 use Codea\Cqrs\Result;
 use RuntimeException;

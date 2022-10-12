@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging;
+namespace Codea\Cqrs;
 
 use Codea\Cqrs\Query;
 use Codea\Cqrs\Result;
