@@ -1,0 +1,38 @@
+{
+    "name": "codea/cqrs-messaging",
+    "description": "",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edo Barnas",
+            "email": "iam@edobarnas.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Codea\\Cqrs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codea\\Cqrs\\Test\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "codea/timekeeper": "0.2.*",
+        "symfony/messenger": "6.1.*",
+        "symfony/validator": "6.1.*",
+        "symfony/uid": "6.1.*"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "1.8.*",
+        "phpstan/phpstan-phpunit": "1.1.*",
+        "phpunit/phpunit": "9.5.*",
+        "symplify/easy-coding-standard": "11.1.*"
+    }
+}
