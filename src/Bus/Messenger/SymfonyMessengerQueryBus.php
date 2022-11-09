@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus;
+namespace Codea\Cqrs\Bus\Messenger;
 
+use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use Codea\Cqrs\Query;
 use Codea\Cqrs\QueryBus;
 use Codea\Cqrs\Result;
@@ -21,9 +22,11 @@ final class SymfonyMessengerQueryBus implements QueryBus
         Query $query,
     ): Result {
         $envelope = $this->messageBus->dispatch($query);
+        $result = $envelope->last(ResultStamp::class);
 
-        return $envelope->last(Result::class)
-            ?? throw new RuntimeException(
+        return ($result instanceof Result)
+            ? $result
+            : throw new RuntimeException(
                 sprintf(
                     'The query "%s" processing did not return any results. Check if there is a suitable query handler with a return value of type "iterable"',
                     $envelope->getMessage()::class,

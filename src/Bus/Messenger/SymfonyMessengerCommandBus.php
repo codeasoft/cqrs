@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus;
+namespace Codea\Cqrs\Bus\Messenger;
 
+use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use Codea\Cqrs\Command;
 use Codea\Cqrs\CommandBus;
 use Codea\Cqrs\Result;
@@ -22,9 +23,11 @@ final class SymfonyMessengerCommandBus implements CommandBus
         Command $command,
     ): Result {
         $envelope = $this->messageBus->dispatch($command);
+        $result = $envelope->last(ResultStamp::class);
 
-        return $envelope->last(Result::class)
-            ?? throw new RuntimeException(
+        return ($result instanceof Result)
+            ? $result
+            : throw new RuntimeException(
                 sprintf(
                     'The command "%s" processing did not return any results. Check if there is a suitable command handler without an return value',
                     $envelope->getMessage()::class,

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Middleware;
+namespace Codea\Cqrs\Bus\Messenger\Middleware;
 
+use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use Codea\Cqrs\Message;
 use Codea\Cqrs\Message\MessageValidator;
 use Codea\Cqrs\Result;
@@ -36,7 +37,7 @@ final class ValidateMessageMiddleware implements Middleware
         return $messageValidity->isValid()
             ? $this->next($envelope, $stack)
             : $envelope->with(
-                Result::failure(
+                ResultStamp::failure(
                     id: $message->id(),
                     createdAt: $this->timeService->measure(),
                     errors: $messageValidity->errors,

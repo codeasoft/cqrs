@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Middleware;
+namespace Codea\Cqrs\Bus\Messenger\Middleware;
 
+use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use Codea\Cqrs\Query;
 use Codea\Cqrs\Result;
 use Codea\Timekeeper\TimeService;
@@ -33,7 +34,7 @@ final class GetHandledQueryResultMiddleware implements MiddlewareInterface
 
             $envelope = is_iterable($payload)
                 ? $envelope->with(
-                    Result::success(
+                    ResultStamp::success(
                         id: $message->id(),
                         createdAt: $this->timeService->measure(),
                         payload: $payload,
