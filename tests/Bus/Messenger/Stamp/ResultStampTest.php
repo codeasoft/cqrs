@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Test;
 
-use Codea\Cqrs\Result;
+use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 
-final class ResultTest extends TestCase
+final class ResultStampTest extends TestCase
 {
     private const ID = 'efa08f7d-c47e-4ced-a094-754fa91d27b0';
 
     public function testItReturnsValidId(): void
     {
-        $result = new Result(
+        $result = new ResultStamp(
             id: Uuid::fromString(self::ID),
             createdAt: new DateTimeImmutable(),
         );
@@ -26,7 +26,7 @@ final class ResultTest extends TestCase
     public function testItReturnsValidCreationDate(): void
     {
         $dateTime = new DateTimeImmutable();
-        $result = new Result(
+        $result = new ResultStamp(
             id: Uuid::fromString(self::ID),
             createdAt: $dateTime,
         );
@@ -39,7 +39,7 @@ final class ResultTest extends TestCase
 
     public function testItHasErrorsIfItFailed(): void
     {
-        $result = new Result(
+        $result = new ResultStamp(
             id: Uuid::fromString(self::ID),
             createdAt: new DateTimeImmutable(),
             errors: [
@@ -53,7 +53,7 @@ final class ResultTest extends TestCase
 
     public function testItHasPayloadIfItSucceeded(): void
     {
-        $result = new Result(
+        $result = new ResultStamp(
             id: Uuid::fromString(self::ID),
             createdAt: new DateTimeImmutable(),
             payload: [
