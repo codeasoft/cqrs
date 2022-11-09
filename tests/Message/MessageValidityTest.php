@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Codea\Cqrs\Test\Message;
 
 use Codea\Cqrs\Command;

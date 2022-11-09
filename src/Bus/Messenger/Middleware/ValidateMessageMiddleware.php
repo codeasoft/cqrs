@@ -7,7 +7,6 @@ namespace Codea\Cqrs\Bus\Messenger\Middleware;
 use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use Codea\Cqrs\Message;
 use Codea\Cqrs\Message\MessageValidator;
-use Codea\Cqrs\Result;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;

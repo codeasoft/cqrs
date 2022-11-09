@@ -6,7 +6,6 @@ namespace Codea\Cqrs\Bus\Messenger\Middleware;
 
 use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
 use Codea\Cqrs\Query;
-use Codea\Cqrs\Result;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
