@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Bus\Messenger\Stamp;
 
-use Codea\Cqrs\Result;
+use Codea\Cqrs\Bus\Payload;
 use DateTimeImmutable;
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Symfony\Component\Uid\Uuid;
 
-final class ResultStamp implements Result, Stamp
+final class PayloadStamp implements Payload, Stamp
 {
     public function __construct(
-        public readonly Uuid $id,
-        public readonly DateTimeImmutable $createdAt,
-        public readonly iterable $payload = [],
-        public readonly iterable $errors = [],
+        private readonly Uuid $id,
+        private readonly DateTimeImmutable $createdAt,
+        private readonly iterable $data = [],
+        private readonly iterable $errors = [],
     ) {
     }
 
     public static function success(
         Uuid $id,
         DateTimeImmutable $createdAt,
-        iterable $payload = [],
+        iterable $data = [],
     ): self {
         return new self(
             id: $id,
             createdAt: $createdAt,
-            payload: $payload,
+            data: $data,
         );
     }
 
@@ -51,5 +51,25 @@ final class ResultStamp implements Result, Stamp
     public function isFailure(): bool
     {
         return ! $this->isSuccess();
+    }
+
+    public function id(): Uuid
+    {
+        return $this->id;
+    }
+
+    public function errors(): iterable
+    {
+        return $this->errors;
+    }
+
+    public function data(): iterable
+    {
+        return $this->data;
+    }
+
+    public function createdAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

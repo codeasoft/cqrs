@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Bus\Messenger\Middleware;
 
-use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
+use Codea\Cqrs\Bus\Messenger\Stamp\PayloadStamp;
 use Codea\Cqrs\Command;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
@@ -31,7 +31,7 @@ final class AckHandledCommandMiddleware implements Middleware
         if ($message instanceof Command) {
             $envelope = $envelope->last(HandledStamp::class)
                 ? $envelope->with(
-                    ResultStamp::success(
+                    PayloadStamp::success(
                         id: $message->id(),
                         createdAt: $this->timeService->measure()
                     )

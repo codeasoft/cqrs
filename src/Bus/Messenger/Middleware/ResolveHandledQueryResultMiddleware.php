@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Codea\Cqrs\Bus\Messenger\Middleware;
 
-use Codea\Cqrs\Bus\Messenger\Stamp\ResultStamp;
+use Codea\Cqrs\Bus\Messenger\Stamp\PayloadStamp;
 use Codea\Cqrs\Query;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-final class GetHandledQueryResultMiddleware implements MiddlewareInterface
+final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
 {
     use StackTrait;
 
@@ -29,14 +29,14 @@ final class GetHandledQueryResultMiddleware implements MiddlewareInterface
 
         $message = $envelope->getMessage();
         if ($message instanceof Query) {
-            $payload = $envelope->last(HandledStamp::class)?->getResult();
+            $result = $envelope->last(HandledStamp::class)?->getResult();
 
-            $envelope = is_iterable($payload)
+            $envelope = is_iterable($result)
                 ? $envelope->with(
-                    ResultStamp::success(
+                    PayloadStamp::success(
                         id: $message->id(),
                         createdAt: $this->timeService->measure(),
-                        payload: $payload,
+                        data: $result,
                     )
                 ) : $envelope;
         }
