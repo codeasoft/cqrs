@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Test\Message;
+namespace Codea\Cqrs\Test\Validation;
 
 use Codea\Cqrs\Command;
-use Codea\Cqrs\Message\MessageValidity;
+use Codea\Cqrs\Validation\MessageValidity;
 use PHPUnit\Framework\TestCase;
 
 final class MessageValidityTest extends TestCase

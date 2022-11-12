@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Message\Validator;
+namespace Codea\Cqrs\Validation\Validator;
 
 use Codea\Cqrs\Message;
-use Codea\Cqrs\Message\MessageValidator;
-use Codea\Cqrs\Message\MessageValidity;
+use Codea\Cqrs\Validation\MessageValidator;
+use Codea\Cqrs\Validation\MessageValidity;
 use Symfony\Component\Validator\ConstraintViolationInterface as ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
 

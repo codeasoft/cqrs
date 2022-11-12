@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Message;
+namespace Codea\Cqrs\Validation;
 
 use Codea\Cqrs\Message;
 
