@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Messenger\Middleware;
+namespace Codea\Cqrs\Messaging\Messenger\Middleware;
 
-use Codea\Cqrs\Bus\Messenger\Stamp\PayloadStamp;
 use Codea\Cqrs\Command;
+use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
-use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Messenger\Stamp\SentStamp;
 
-final class AckHandledCommandMiddleware implements Middleware
+final class AckSentCommandMiddleware implements Middleware
 {
     use StackTrait;
 
@@ -23,13 +23,13 @@ final class AckHandledCommandMiddleware implements Middleware
 
     public function handle(
         Envelope $envelope,
-        Stack $stack,
+        Stack $stack
     ): Envelope {
         $envelope = $this->next($envelope, $stack);
 
         $message = $envelope->getMessage();
         if ($message instanceof Command) {
-            $envelope = $envelope->last(HandledStamp::class)
+            $envelope = $envelope->last(SentStamp::class)
                 ? $envelope->with(
                     PayloadStamp::success(
                         id: $message->id(),

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs;
+namespace Codea\Cqrs\Messaging;
 
-use Codea\Cqrs\Bus\Payload;
+use Codea\Cqrs\Command;
 
 interface CommandBus
 {

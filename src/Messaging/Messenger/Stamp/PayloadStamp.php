@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Messenger\Stamp;
+namespace Codea\Cqrs\Messaging\Messenger\Stamp;
 
-use Codea\Cqrs\Bus\Payload;
+use Codea\Cqrs\Messaging\Payload;
 use DateTimeImmutable;
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Symfony\Component\Uid\Uuid;

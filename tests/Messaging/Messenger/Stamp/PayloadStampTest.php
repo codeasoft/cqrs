@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Test;
+namespace Codea\Cqrs\Test\Messaging\Messenger\Stamp;
 
-use Codea\Cqrs\Bus\Messenger\Stamp\PayloadStamp;
+use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;

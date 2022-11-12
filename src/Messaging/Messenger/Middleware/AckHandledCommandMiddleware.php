@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Messenger\Middleware;
+namespace Codea\Cqrs\Messaging\Messenger\Middleware;
 
-use Codea\Cqrs\Bus\Messenger\Stamp\PayloadStamp;
-use Codea\Cqrs\Query;
+use Codea\Cqrs\Command;
+use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
+use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
+final class AckHandledCommandMiddleware implements Middleware
 {
     use StackTrait;
 
@@ -23,20 +23,17 @@ final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
 
     public function handle(
         Envelope $envelope,
-        Stack $stack
+        Stack $stack,
     ): Envelope {
         $envelope = $this->next($envelope, $stack);
 
         $message = $envelope->getMessage();
-        if ($message instanceof Query) {
-            $result = $envelope->last(HandledStamp::class)?->getResult();
-
-            $envelope = is_iterable($result)
+        if ($message instanceof Command) {
+            $envelope = $envelope->last(HandledStamp::class)
                 ? $envelope->with(
                     PayloadStamp::success(
                         id: $message->id(),
-                        createdAt: $this->timeService->measure(),
-                        data: $result,
+                        createdAt: $this->timeService->measure()
                     )
                 ) : $envelope;
         }

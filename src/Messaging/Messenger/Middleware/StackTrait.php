@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Messenger\Middleware;
+namespace Codea\Cqrs\Messaging\Messenger\Middleware;
 
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;

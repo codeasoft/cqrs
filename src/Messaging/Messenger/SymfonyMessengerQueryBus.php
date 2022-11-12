@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Bus\Messenger;
+namespace Codea\Cqrs\Messaging\Messenger;
 
-use Codea\Cqrs\Bus\Messenger\Stamp\PayloadStamp;
-use Codea\Cqrs\Bus\Payload;
+use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Codea\Cqrs\Messaging\Payload;
+use Codea\Cqrs\Messaging\QueryBus;
 use Codea\Cqrs\Query;
-use Codea\Cqrs\QueryBus;
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
 
