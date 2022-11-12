@@ -1,1 +1,1 @@
-# cqrs-messaging
+# Command Query Responsibility Segregation
