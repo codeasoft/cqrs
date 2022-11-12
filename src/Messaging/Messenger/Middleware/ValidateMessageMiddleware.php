@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Codea\Cqrs\Messaging\Messenger\Middleware;
 
 use Codea\Cqrs\Message;
-use Codea\Cqrs\Message\MessageValidator;
 use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Codea\Cqrs\Validation\MessageValidator;
 use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
