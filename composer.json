@@ -1,6 +1,6 @@
 {
     "name": "termyn/cqrs",
-    "description": "",
+    "description": "CQRS architecture based on the Symfony Messenger 4.3 and higher",
     "type": "library",
     "license": "MIT",
     "authors": [
