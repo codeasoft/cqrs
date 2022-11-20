@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs;
+namespace Termyn\Cqrs;
 
 use DateTimeImmutable;
 

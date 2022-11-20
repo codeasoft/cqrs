@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Validation;
+namespace Termyn\Cqrs\Validation;
 
-use Codea\Cqrs\Message;
+use Termyn\Cqrs\Message;
 
 interface MessageValidator
 {

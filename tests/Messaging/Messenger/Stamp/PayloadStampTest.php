@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Test\Messaging\Messenger\Stamp;
+namespace Termyn\Cqrs\Test\Messaging\Messenger\Stamp;
 
-use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
 
 final class PayloadStampTest extends TestCase
 {

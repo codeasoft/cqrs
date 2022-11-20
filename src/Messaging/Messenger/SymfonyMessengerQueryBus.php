@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging\Messenger;
+namespace Termyn\Cqrs\Messaging\Messenger;
 
-use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
-use Codea\Cqrs\Messaging\Payload;
-use Codea\Cqrs\Messaging\QueryBus;
-use Codea\Cqrs\Query;
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Termyn\Cqrs\Messaging\Payload;
+use Termyn\Cqrs\Messaging\QueryBus;
+use Termyn\Cqrs\Query;
 
 final class SymfonyMessengerQueryBus implements QueryBus
 {

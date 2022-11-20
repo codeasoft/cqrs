@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Test\Validation;
+namespace Termyn\Cqrs\Test\Validation;
 
-use Codea\Cqrs\Command;
-use Codea\Cqrs\Validation\MessageValidity;
 use PHPUnit\Framework\TestCase;
+use Termyn\Cqrs\Command;
+use Termyn\Cqrs\Validation\MessageValidity;
 
 final class MessageValidityTest extends TestCase
 {

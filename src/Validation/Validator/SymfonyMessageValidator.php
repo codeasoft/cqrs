@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Validation\Validator;
+namespace Termyn\Cqrs\Validation\Validator;
 
-use Codea\Cqrs\Message;
-use Codea\Cqrs\Validation\MessageValidator;
-use Codea\Cqrs\Validation\MessageValidity;
 use Symfony\Component\Validator\ConstraintViolationInterface as ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator;
+use Termyn\Cqrs\Message;
+use Termyn\Cqrs\Validation\MessageValidator;
+use Termyn\Cqrs\Validation\MessageValidity;
 
 final class SymfonyMessageValidator implements MessageValidator
 {

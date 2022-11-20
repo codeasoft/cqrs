@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging;
+namespace Termyn\Cqrs\Messaging;
 
-use Codea\Cqrs\Command;
+use Termyn\Cqrs\Command;
 
 interface CommandBus
 {

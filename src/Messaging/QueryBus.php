@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging;
+namespace Termyn\Cqrs\Messaging;
 
-use Codea\Cqrs\Query;
+use Termyn\Cqrs\Query;
 
 interface QueryBus
 {

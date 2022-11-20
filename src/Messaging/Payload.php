@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging;
+namespace Termyn\Cqrs\Messaging;
 
 use DateTimeImmutable;
 use Symfony\Component\Uid\Uuid;

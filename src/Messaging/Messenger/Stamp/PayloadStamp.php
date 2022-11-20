@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging\Messenger\Stamp;
+namespace Termyn\Cqrs\Messaging\Messenger\Stamp;
 
-use Codea\Cqrs\Messaging\Payload;
 use DateTimeImmutable;
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Symfony\Component\Uid\Uuid;
+use Termyn\Cqrs\Messaging\Payload;
 
 final class PayloadStamp implements Payload, Stamp
 {

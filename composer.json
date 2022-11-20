@@ -1,5 +1,5 @@
 {
-    "name": "codea/cqrs",
+    "name": "termyn/cqrs",
     "description": "",
     "type": "library",
     "license": "MIT",
@@ -14,20 +14,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Codea\\Cqrs\\": "src/"
+            "Termyn\\Cqrs\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Codea\\Cqrs\\Test\\": "tests"
+            "Termyn\\Cqrs\\Test\\": "tests"
         }
     },
     "require": {
         "php": "^8.1",
-        "codea/timekeeper": "0.2.*",
         "symfony/messenger": "6.1.*",
         "symfony/validator": "6.1.*",
-        "symfony/uid": "6.1.*"
+        "symfony/uid": "6.1.*",
+        "termyn/timekeeper": "0.3.*"
     },
     "require-dev": {
         "phpstan/phpstan": "1.8.*",

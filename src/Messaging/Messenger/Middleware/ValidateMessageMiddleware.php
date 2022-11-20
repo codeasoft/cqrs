@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging\Messenger\Middleware;
+namespace Termyn\Cqrs\Messaging\Messenger\Middleware;
 
-use Codea\Cqrs\Message;
-use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
-use Codea\Cqrs\Validation\MessageValidator;
-use Codea\Timekeeper\TimeService;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
+use Termyn\Cqrs\Message;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Termyn\Cqrs\Validation\MessageValidator;
+use Termyn\Timekeeper\TimeService;
 
 final class ValidateMessageMiddleware implements Middleware
 {

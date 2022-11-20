@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Codea\Cqrs\Messaging\Messenger;
+namespace Termyn\Cqrs\Messaging\Messenger;
 
-use Codea\Cqrs\Command;
-use Codea\Cqrs\Messaging\CommandBus;
-use Codea\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
-use Codea\Cqrs\Messaging\Payload;
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
+use Termyn\Cqrs\Command;
+use Termyn\Cqrs\Messaging\CommandBus;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Termyn\Cqrs\Messaging\Payload;
 
 final class SymfonyMessengerCommandBus implements CommandBus
 {
