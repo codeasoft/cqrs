@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Termyn\Cqrs\Messaging;
 
 use DateTimeImmutable;
-use Symfony\Component\Uid\Uuid;
+use Termyn\Identifier\Id;
 
 interface Payload
 {
@@ -13,7 +13,7 @@ interface Payload
 
     public function isFailure(): bool;
 
-    public function id(): Uuid;
+    public function id(): Id;
 
     public function errors(): iterable;
 

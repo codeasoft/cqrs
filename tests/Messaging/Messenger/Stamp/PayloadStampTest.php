@@ -6,8 +6,8 @@ namespace Termyn\Cqrs\Test\Messaging\Messenger\Stamp;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Uid\Uuid;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Termyn\Identifier\Uuid\Symfony\SymfonyUuid;
 
 final class PayloadStampTest extends TestCase
 {
@@ -16,18 +16,19 @@ final class PayloadStampTest extends TestCase
     public function testItReturnsValidId(): void
     {
         $payload = new PayloadStamp(
-            id: Uuid::fromString(self::ID),
+            id: SymfonyUuid::fromString(self::ID),
             createdAt: new DateTimeImmutable(),
         );
 
-        $this->assertSame(self::ID, $payload->id()->toRfc4122());
+        $id = $payload->id();
+        $this->assertSame(self::ID, (string) $id);
     }
 
     public function testItReturnsValidCreationDate(): void
     {
         $dateTime = new DateTimeImmutable();
         $payload = new PayloadStamp(
-            id: Uuid::fromString(self::ID),
+            id: SymfonyUuid::fromString(self::ID),
             createdAt: $dateTime,
         );
 
@@ -40,7 +41,7 @@ final class PayloadStampTest extends TestCase
     public function testItHasErrorsIfItFailed(): void
     {
         $payload = new PayloadStamp(
-            id: Uuid::fromString(self::ID),
+            id: SymfonyUuid::fromString(self::ID),
             createdAt: new DateTimeImmutable(),
             errors: [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -54,7 +55,7 @@ final class PayloadStampTest extends TestCase
     public function testItHasPayloadIfItSucceeded(): void
     {
         $payload = new PayloadStamp(
-            id: Uuid::fromString(self::ID),
+            id: SymfonyUuid::fromString(self::ID),
             createdAt: new DateTimeImmutable(),
             data: [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

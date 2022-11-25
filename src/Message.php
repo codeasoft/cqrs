@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs;
 
-use Symfony\Component\Uid\Uuid;
+use Termyn\Identifier\Id;
 
 interface Message
 {
-    public function id(): Uuid;
+    public function id(): Id;
 }
