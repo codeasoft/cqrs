@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Messaging;
 
-use DateTimeImmutable;
+use DateTimeImmutable as DateTime;
 use Termyn\Identifier\Id;
 
 interface Payload
@@ -19,5 +19,5 @@ interface Payload
 
     public function data(): iterable;
 
-    public function createdAt(): DateTimeImmutable;
+    public function createdAt(): DateTime;
 }

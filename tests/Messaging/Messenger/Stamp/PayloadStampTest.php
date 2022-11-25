@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Test\Messaging\Messenger\Stamp;
 
-use DateTimeImmutable;
+use DateTimeImmutable as DateTime;
 use PHPUnit\Framework\TestCase;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
 use Termyn\Identifier\Uuid\Symfony\SymfonyUuid;
@@ -17,16 +17,17 @@ final class PayloadStampTest extends TestCase
     {
         $payload = new PayloadStamp(
             id: SymfonyUuid::fromString(self::ID),
-            createdAt: new DateTimeImmutable(),
+            createdAt: new DateTime(),
         );
 
         $id = $payload->id();
+
         $this->assertSame(self::ID, (string) $id);
     }
 
     public function testItReturnsValidCreationDate(): void
     {
-        $dateTime = new DateTimeImmutable();
+        $dateTime = new DateTime();
         $payload = new PayloadStamp(
             id: SymfonyUuid::fromString(self::ID),
             createdAt: $dateTime,
@@ -42,7 +43,7 @@ final class PayloadStampTest extends TestCase
     {
         $payload = new PayloadStamp(
             id: SymfonyUuid::fromString(self::ID),
-            createdAt: new DateTimeImmutable(),
+            createdAt: new DateTime(),
             errors: [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
@@ -56,7 +57,7 @@ final class PayloadStampTest extends TestCase
     {
         $payload = new PayloadStamp(
             id: SymfonyUuid::fromString(self::ID),
-            createdAt: new DateTimeImmutable(),
+            createdAt: new DateTime(),
             data: [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],

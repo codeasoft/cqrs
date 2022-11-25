@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Messaging\Messenger\Stamp;
 
-use DateTimeImmutable;
+use DateTimeImmutable as DateTime;
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Termyn\Cqrs\Messaging\Payload;
 use Termyn\Identifier\Id;
@@ -13,7 +13,7 @@ final class PayloadStamp implements Payload, Stamp
 {
     public function __construct(
         private readonly Id $id,
-        private readonly DateTimeImmutable $createdAt,
+        private readonly DateTime $createdAt,
         private readonly iterable $data = [],
         private readonly iterable $errors = [],
     ) {
@@ -21,7 +21,7 @@ final class PayloadStamp implements Payload, Stamp
 
     public static function success(
         Id $id,
-        DateTimeImmutable $createdAt,
+        DateTime $createdAt,
         iterable $data = [],
     ): self {
         return new self(
@@ -33,7 +33,7 @@ final class PayloadStamp implements Payload, Stamp
 
     public static function failure(
         Id $id,
-        DateTimeImmutable $createdAt,
+        DateTime $createdAt,
         iterable $errors,
     ): self {
         return new self(
@@ -68,7 +68,7 @@ final class PayloadStamp implements Payload, Stamp
         return $this->data;
     }
 
-    public function createdAt(): DateTimeImmutable
+    public function createdAt(): DateTime
     {
         return $this->createdAt;
     }
