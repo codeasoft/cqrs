@@ -8,7 +8,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Query;
 use Termyn\Timekeeper\TimeService;
 
@@ -29,14 +29,14 @@ final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
 
         $message = $envelope->getMessage();
         if ($message instanceof Query) {
-            $result = $envelope->last(HandledStamp::class)?->getResult();
+            $payload = $envelope->last(HandledStamp::class)?->getResult();
 
-            $envelope = is_iterable($result)
+            $envelope = is_iterable($payload)
                 ? $envelope->with(
-                    PayloadStamp::success(
+                    ResultStamp::success(
                         id: $message->id(),
                         createdAt: $this->timeService->measure(),
-                        data: $result,
+                        payload: $payload,
                     )
                 ) : $envelope;
         }

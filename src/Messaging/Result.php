@@ -7,7 +7,7 @@ namespace Termyn\Cqrs\Messaging;
 use DateTimeImmutable as DateTime;
 use Termyn\Identifier\Id;
 
-interface Payload
+interface Result
 {
     public function isSuccess(): bool;
 
@@ -17,7 +17,7 @@ interface Payload
 
     public function errors(): iterable;
 
-    public function data(): iterable;
+    public function payload(): iterable;
 
     public function createdAt(): DateTime;
 }

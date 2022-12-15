@@ -8,7 +8,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Termyn\Cqrs\Message;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Validation\MessageValidator;
 use Termyn\Timekeeper\TimeService;
 
@@ -36,7 +36,7 @@ final class ValidateMessageMiddleware implements Middleware
         return $messageValidity->isValid()
             ? $this->next($envelope, $stack)
             : $envelope->with(
-                PayloadStamp::failure(
+                ResultStamp::failure(
                     id: $message->id(),
                     createdAt: $this->timeService->measure(),
                     errors: $messageValidity->errors,

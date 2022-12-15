@@ -6,9 +6,9 @@ namespace Termyn\Cqrs\Messaging\Messenger;
 
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\PayloadStamp;
-use Termyn\Cqrs\Messaging\Payload;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Messaging\QueryBus;
+use Termyn\Cqrs\Messaging\Result;
 use Termyn\Cqrs\Query;
 
 final class SymfonyMessengerQueryBus implements QueryBus
@@ -20,11 +20,11 @@ final class SymfonyMessengerQueryBus implements QueryBus
 
     public function dispatch(
         Query $query,
-    ): Payload {
+    ): Result {
         $envelope = $this->messageBus->dispatch($query);
-        $payload = $envelope->last(PayloadStamp::class);
+        $payload = $envelope->last(ResultStamp::class);
 
-        return ($payload instanceof Payload)
+        return ($payload instanceof Result)
             ? $payload
             : throw new RuntimeException(
                 sprintf(

@@ -8,5 +8,5 @@ use Termyn\Cqrs\Query;
 
 interface QueryBus
 {
-    public function dispatch(Query $query): Payload;
+    public function dispatch(Query $query): Result;
 }

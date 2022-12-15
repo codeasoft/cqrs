@@ -8,5 +8,5 @@ use Termyn\Cqrs\Command;
 
 interface CommandBus
 {
-    public function dispatch(Command $command): Payload;
+    public function dispatch(Command $command): Result;
 }
