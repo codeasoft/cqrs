@@ -31,14 +31,13 @@ final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
         if ($message instanceof Query) {
             $payload = $envelope->last(HandledStamp::class)?->getResult();
 
-            $envelope = is_iterable($payload)
-                ? $envelope->with(
-                    ResultStamp::success(
-                        id: $message->id(),
-                        createdAt: $this->timeService->measure(),
-                        payload: $payload,
-                    )
-                ) : $envelope;
+            return $envelope->with(
+                ResultStamp::success(
+                    id: $message->id(),
+                    createdAt: $this->timeService->measure(),
+                    payload: is_iterable($payload) ? $payload : [$payload],
+                )
+            );
         }
 
         return $envelope;
