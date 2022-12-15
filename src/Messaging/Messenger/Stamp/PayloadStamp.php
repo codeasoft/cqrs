@@ -9,13 +9,13 @@ use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Termyn\Cqrs\Messaging\Payload;
 use Termyn\Identifier\Id;
 
-final class PayloadStamp implements Payload, Stamp
+final readonly class PayloadStamp implements Payload, Stamp
 {
     public function __construct(
-        private readonly Id $id,
-        private readonly DateTime $createdAt,
-        private readonly iterable $data = [],
-        private readonly iterable $errors = [],
+        private Id $id,
+        private DateTime $createdAt,
+        private iterable $data = [],
+        private iterable $errors = [],
     ) {
     }
 
