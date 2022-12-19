@@ -8,16 +8,16 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Termyn\Clock;
 use Termyn\Cqrs\Command;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
-use Termyn\Timekeeper\TimeService;
 
 final class AckHandledCommandMiddleware implements Middleware
 {
     use StackTrait;
 
     public function __construct(
-        private readonly TimeService $timeService,
+        private readonly Clock $clock,
     ) {
     }
 
@@ -33,7 +33,7 @@ final class AckHandledCommandMiddleware implements Middleware
                 ? $envelope->with(
                     ResultStamp::success(
                         id: $message->id(),
-                        createdAt: $this->timeService->measure()
+                        createdAt: $this->clock->measure()
                     )
                 ) : $envelope;
         }

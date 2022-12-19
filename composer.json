@@ -26,8 +26,8 @@
         "php": "^8.2",
         "symfony/messenger": "6.2.*",
         "symfony/validator": "6.2.*",
-        "termyn/identifier": "dev-main",
-        "termyn/timekeeper": "0.3.*"
+        "termyn/id": "dev-main",
+        "termyn/date-time": "dev-main"
     },
     "require-dev": {
         "phpstan/phpstan": "1.9.*",

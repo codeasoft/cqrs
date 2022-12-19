@@ -4,46 +4,47 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Test\Messaging\Messenger\Stamp;
 
-use DateTimeImmutable as DateTime;
 use PHPUnit\Framework\TestCase;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
-use Termyn\Identifier\Uuid\Symfony\SymfonyUuid;
+use Termyn\Instant;
+use Termyn\Uuid\Symfony\SymfonyUuid;
 
 final class ResultStampTest extends TestCase
 {
-    private const ID = 'efa08f7d-c47e-4ced-a094-754fa91d27b0';
-
     public function testItReturnsValidId(): void
     {
-        $resultStamp = new ResultStamp(
-            id: $this->getId(),
-            createdAt: new DateTime(),
+        $id = $this->getId();
+        $instant = $this->getInstant();
+
+        $resultStamp = new ResultStamp($id, $instant);
+
+        $this->assertSame(
+            expected: $id,
+            actual: $resultStamp->id(),
         );
-
-        $id = $resultStamp->id();
-
-        $this->assertSame(self::ID, (string) $id);
     }
 
     public function testItReturnsValidCreationDate(): void
     {
-        $dateTime = new DateTime();
-        $resultStamp = new ResultStamp(
-            id: $this->getId(),
-            createdAt: $dateTime,
-        );
+        $id = $this->getId();
+        $instant = $this->getInstant();
+
+        $resultStamp = new ResultStamp($id, $instant);
 
         $this->assertSame(
-            $dateTime->format(DATE_ATOM),
-            $resultStamp->createdAt()->format(DATE_ATOM)
+            expected: $instant,
+            actual: $resultStamp->createdAt(),
         );
     }
 
     public function testItHasErrorsIfItFailed(): void
     {
+        $id = $this->getId();
+        $instant = $this->getInstant();
+
         $resultStamp = new ResultStamp(
-            id: $this->getId(),
-            createdAt: new DateTime(),
+            id: $id,
+            createdAt: $instant,
             errors: [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
@@ -55,9 +56,12 @@ final class ResultStampTest extends TestCase
 
     public function testItHasPayloadIfItSucceeded(): void
     {
+        $id = $this->getId();
+        $instant = $this->getInstant();
+
         $resultStamp = new ResultStamp(
-            id: $this->getId(),
-            createdAt: new DateTime(),
+            id: $id,
+            createdAt: $instant,
             payload: [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
@@ -69,6 +73,11 @@ final class ResultStampTest extends TestCase
 
     private function getId(): SymfonyUuid
     {
-        return SymfonyUuid::fromString(self::ID);
+        return SymfonyUuid::fromString('efa08f7d-c47e-4ced-a094-754fa91d27b0');
+    }
+
+    private function getInstant(): Instant
+    {
+        return Instant::of(1671478648);
     }
 }

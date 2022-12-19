@@ -8,16 +8,16 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Termyn\Clock;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Query;
-use Termyn\Timekeeper\TimeService;
 
 final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
 {
     use StackTrait;
 
     public function __construct(
-        private readonly TimeService $timeService,
+        private readonly Clock $clock,
     ) {
     }
 
@@ -34,7 +34,7 @@ final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
             return $envelope->with(
                 ResultStamp::success(
                     id: $message->id(),
-                    createdAt: $this->timeService->measure(),
+                    createdAt: $this->clock->measure(),
                     payload: is_iterable($payload) ? $payload : [$payload],
                 )
             );

@@ -7,10 +7,10 @@ namespace Termyn\Cqrs\Messaging\Messenger\Middleware;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
+use Termyn\Clock;
 use Termyn\Cqrs\Message;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Validation\MessageValidator;
-use Termyn\Timekeeper\TimeService;
 
 final class ValidateMessageMiddleware implements Middleware
 {
@@ -18,7 +18,7 @@ final class ValidateMessageMiddleware implements Middleware
 
     public function __construct(
         private readonly MessageValidator $messageValidator,
-        private readonly TimeService $timeService,
+        private readonly Clock $clock,
     ) {
     }
 
@@ -38,7 +38,7 @@ final class ValidateMessageMiddleware implements Middleware
             : $envelope->with(
                 ResultStamp::failure(
                     id: $message->id(),
-                    createdAt: $this->timeService->measure(),
+                    createdAt: $this->clock->measure(),
                     errors: $messageValidity->errors,
                 )
             );

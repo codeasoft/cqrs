@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Messaging\Messenger\Stamp;
 
-use DateTimeImmutable as DateTime;
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Termyn\Cqrs\Messaging\Result;
-use Termyn\Identifier\Id;
+use Termyn\Id;
+use Termyn\Instant;
 
 final readonly class ResultStamp implements Result, Stamp
 {
     public function __construct(
         private Id $id,
-        private DateTime $createdAt,
+        private Instant $createdAt,
         private iterable $payload = [],
         private iterable $errors = [],
     ) {
@@ -21,7 +21,7 @@ final readonly class ResultStamp implements Result, Stamp
 
     public static function success(
         Id $id,
-        DateTime $createdAt,
+        Instant $createdAt,
         iterable $payload = [],
     ): self {
         return new self(
@@ -33,7 +33,7 @@ final readonly class ResultStamp implements Result, Stamp
 
     public static function failure(
         Id $id,
-        DateTime $createdAt,
+        Instant $createdAt,
         iterable $errors,
     ): self {
         return new self(
@@ -68,7 +68,7 @@ final readonly class ResultStamp implements Result, Stamp
         return $this->payload;
     }
 
-    public function createdAt(): DateTime
+    public function createdAt(): Instant
     {
         return $this->createdAt;
     }

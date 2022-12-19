@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs;
 
-use DateTimeImmutable as DateTime;
-use Termyn\Identifier\Gid;
+use Termyn\Instant;
 
 interface Command extends Message
 {
-    public function id(): Gid;
-
-    public function issuedOn(): DateTime;
+    public function issuedOn(): Instant;
 }
