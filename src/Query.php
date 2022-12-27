@@ -8,5 +8,5 @@ use Termyn\DateTime\Instant;
 
 interface Query extends Message
 {
-    public function askedOn(): Instant;
+    public function askedAt(): Instant;
 }

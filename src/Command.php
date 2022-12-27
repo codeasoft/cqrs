@@ -8,5 +8,5 @@ use Termyn\DateTime\Instant;
 
 interface Command extends Message
 {
-    public function issuedOn(): Instant;
+    public function issuedAt(): Instant;
 }
