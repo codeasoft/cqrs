@@ -8,9 +8,9 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Termyn\Clock;
 use Termyn\Cqrs\Command;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
+use Termyn\DateTime\Clock;
 
 final class AckHandledCommandMiddleware implements Middleware
 {

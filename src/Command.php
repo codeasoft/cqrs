@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs;
 
-use Termyn\Instant;
+use Termyn\DateTime\Instant;
 
 interface Command extends Message
 {

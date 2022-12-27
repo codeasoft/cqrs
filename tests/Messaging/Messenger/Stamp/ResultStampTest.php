@@ -6,7 +6,7 @@ namespace Termyn\Cqrs\Test\Messaging\Messenger\Stamp;
 
 use PHPUnit\Framework\TestCase;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
-use Termyn\Instant;
+use Termyn\DateTime\Instant;
 use Termyn\Uuid\Symfony\SymfonyUuid;
 
 final class ResultStampTest extends TestCase

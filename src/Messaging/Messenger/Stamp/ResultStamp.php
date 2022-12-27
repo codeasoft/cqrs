@@ -6,8 +6,8 @@ namespace Termyn\Cqrs\Messaging\Messenger\Stamp;
 
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
 use Termyn\Cqrs\Messaging\Result;
+use Termyn\DateTime\Instant;
 use Termyn\Id;
-use Termyn\Instant;
 
 final readonly class ResultStamp implements Result, Stamp
 {

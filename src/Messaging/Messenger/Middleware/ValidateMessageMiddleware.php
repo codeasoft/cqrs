@@ -7,10 +7,10 @@ namespace Termyn\Cqrs\Messaging\Messenger\Middleware;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
-use Termyn\Clock;
 use Termyn\Cqrs\Message;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Validation\MessageValidator;
+use Termyn\DateTime\Clock;
 
 final class ValidateMessageMiddleware implements Middleware
 {

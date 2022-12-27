@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Messaging;
 
+use Termyn\DateTime\Instant;
 use Termyn\Id;
-use Termyn\Instant;
 
 interface Result
 {

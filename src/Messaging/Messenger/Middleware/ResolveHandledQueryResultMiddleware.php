@@ -8,9 +8,9 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Termyn\Clock;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Query;
+use Termyn\DateTime\Clock;
 
 final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
 {
