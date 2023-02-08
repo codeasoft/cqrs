@@ -53,6 +53,16 @@ final readonly class ResultStamp implements Result, Stamp
         return ! $this->isSuccess();
     }
 
+    public function hasPayload(): bool
+    {
+        return 0 < count($this->payload);
+    }
+
+    public function hasErrors(): bool
+    {
+        return 0 < count($this->errors);
+    }
+
     public function id(): Id
     {
         return $this->id;

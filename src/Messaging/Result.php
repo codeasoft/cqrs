@@ -13,6 +13,10 @@ interface Result
 
     public function isFailure(): bool;
 
+    public function hasPayload(): bool;
+
+    public function hasErrors(): bool;
+
     public function id(): Id;
 
     public function errors(): iterable;

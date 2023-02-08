@@ -51,6 +51,7 @@ final class ResultStampTest extends TestCase
         );
 
         $this->assertTrue($resultStamp->isFailure());
+        $this->assertTrue($resultStamp->hasErrors());
         $this->assertCount(1, $resultStamp->errors());
     }
 
@@ -68,6 +69,7 @@ final class ResultStampTest extends TestCase
         );
 
         $this->assertTrue($resultStamp->isSuccess());
+        $this->assertTrue($resultStamp->hasPayload());
         $this->assertCount(1, $resultStamp->payload());
     }
 
