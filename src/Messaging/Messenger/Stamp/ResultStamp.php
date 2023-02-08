@@ -55,12 +55,12 @@ final readonly class ResultStamp implements Result, Stamp
 
     public function hasPayload(): bool
     {
-        return 0 < count($this->payload);
+        return count($this->payload) > 0;
     }
 
     public function hasErrors(): bool
     {
-        return 0 < count($this->errors);
+        return count($this->errors) > 0;
     }
 
     public function id(): Id
