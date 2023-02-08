@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs;
 
-use Termyn\GlobalId;
+use Termyn\Id;
 
 interface Message
 {
-    public function id(): GlobalId;
+    public function id(): Id;
 }
