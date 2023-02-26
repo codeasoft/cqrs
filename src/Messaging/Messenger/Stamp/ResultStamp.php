@@ -78,6 +78,11 @@ final readonly class ResultStamp implements Result, Stamp
         return $this->payload;
     }
 
+    public function payloadAsArray(): array
+    {
+        return iterator_to_array($this->payload);
+    }
+
     public function createdAt(): Instant
     {
         return $this->createdAt;
