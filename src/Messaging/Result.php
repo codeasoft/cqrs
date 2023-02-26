@@ -23,5 +23,7 @@ interface Result
 
     public function payload(): iterable;
 
+    public function payloadAsArray(): array;
+
     public function createdAt(): Instant;
 }
