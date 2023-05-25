@@ -8,7 +8,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\QueryResultStamp;
 use Termyn\Cqrs\Query;
 use Termyn\DateTime\Clock;
 
@@ -21,23 +21,21 @@ final readonly class ResolveHandledQueryResultMiddleware implements MiddlewareIn
     ) {
     }
 
-    public function handle(
-        Envelope $envelope,
-        Stack $stack
-    ): Envelope {
+    public function handle(Envelope $envelope, Stack $stack): Envelope
+    {
         $envelope = $this->next($envelope, $stack);
 
         $message = $envelope->getMessage();
         if ($message instanceof Query) {
             $payload = $envelope->last(HandledStamp::class)?->getResult();
 
-            return $envelope->with(
-                ResultStamp::success(
-                    id: $message->id(),
-                    createdAt: $this->clock->measure(),
-                    payload: is_iterable($payload) ? $payload : [$payload],
-                )
-            );
+            $envelope = $payload
+                ? $envelope->with(
+                    QueryResultStamp::handled(
+                        payload: is_iterable($payload) ? $payload : [$payload],
+                        createdAt: $this->clock->measure(),
+                    )
+                ) : $envelope;
         }
 
         return $envelope;

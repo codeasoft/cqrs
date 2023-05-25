@@ -8,25 +8,24 @@ use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
 use Termyn\Cqrs\Command;
 use Termyn\Cqrs\Messaging\CommandBus;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
-use Termyn\Cqrs\Messaging\Result;
+use Termyn\Cqrs\Messaging\CommandResult;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\CommandResultStamp;
 
 final readonly class SymfonyMessengerCommandBus implements CommandBus
 {
     public function __construct(
         private MessageBus $messageBus,
     ) {
-
     }
 
-    public function dispatch(
-        Command $command,
-    ): Result {
+    public function dispatch(Command $command): CommandResult
+    {
         $envelope = $this->messageBus->dispatch($command);
-        $payload = $envelope->last(ResultStamp::class);
 
-        return ($payload instanceof Result)
-            ? $payload
+        $result = $envelope->last(CommandResultStamp::class);
+
+        return $result instanceof CommandResult
+            ? $result
             : throw new RuntimeException(
                 sprintf(
                     'The command "%s" processing did not return any results. Check if there is a suitable command handler without an return value',

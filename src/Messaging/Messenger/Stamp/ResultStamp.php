@@ -5,57 +5,33 @@ declare(strict_types=1);
 namespace Termyn\Cqrs\Messaging\Messenger\Stamp;
 
 use Symfony\Component\Messenger\Stamp\StampInterface as Stamp;
+use Termyn\Cqrs\Messaging\MessageStatus;
 use Termyn\Cqrs\Messaging\Result;
 use Termyn\DateTime\Instant;
-use Termyn\Id;
 
-final readonly class ResultStamp implements Result, Stamp
+abstract readonly class ResultStamp implements Result, Stamp
 {
     public function __construct(
-        private Id $id,
+        private MessageStatus $messageStatus,
         private Instant $createdAt,
-        private iterable $payload = [],
-        private iterable $errors = [],
+        private array $errors = [],
     ) {
-    }
-
-    public static function success(
-        Id $id,
-        Instant $createdAt,
-        iterable $payload = [],
-    ): self {
-        return new self(
-            id: $id,
-            createdAt: $createdAt,
-            payload: $payload,
-        );
-    }
-
-    public static function failure(
-        Id $id,
-        Instant $createdAt,
-        iterable $errors,
-    ): self {
-        return new self(
-            id: $id,
-            createdAt: $createdAt,
-            errors: $errors,
-        );
     }
 
     public function isSuccess(): bool
     {
-        return empty($this->errors);
+        return $this->messageStatus->isHandled()
+            || $this->messageStatus->isSent();
     }
 
     public function isFailure(): bool
     {
-        return ! $this->isSuccess();
+        return $this->messageStatus->isFailed();
     }
 
-    public function hasPayload(): bool
+    public function isRejected(): bool
     {
-        return count($this->payload) > 0;
+        return $this->messageStatus->isInvalid();
     }
 
     public function hasErrors(): bool
@@ -63,28 +39,23 @@ final readonly class ResultStamp implements Result, Stamp
         return count($this->errors) > 0;
     }
 
-    public function id(): Id
-    {
-        return $this->id;
-    }
-
-    public function errors(): iterable
+    public function errors(): array
     {
         return $this->errors;
-    }
-
-    public function payload(): iterable
-    {
-        return $this->payload;
-    }
-
-    public function payloadAsArray(): array
-    {
-        return iterator_to_array($this->payload);
     }
 
     public function createdAt(): Instant
     {
         return $this->createdAt;
+    }
+
+    protected function isHandled(): bool
+    {
+        return $this->messageStatus->isHandled();
+    }
+
+    protected function isSent(): bool
+    {
+        return $this->messageStatus->isSent();
     }
 }

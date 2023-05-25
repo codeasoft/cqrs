@@ -6,9 +6,9 @@ namespace Termyn\Cqrs\Messaging\Messenger;
 
 use RuntimeException;
 use Symfony\Component\Messenger\MessageBusInterface as MessageBus;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\QueryResultStamp;
 use Termyn\Cqrs\Messaging\QueryBus;
-use Termyn\Cqrs\Messaging\Result;
+use Termyn\Cqrs\Messaging\QueryResult;
 use Termyn\Cqrs\Query;
 
 final readonly class SymfonyMessengerQueryBus implements QueryBus
@@ -18,14 +18,14 @@ final readonly class SymfonyMessengerQueryBus implements QueryBus
     ) {
     }
 
-    public function dispatch(
-        Query $query,
-    ): Result {
+    public function dispatch(Query $query): QueryResult
+    {
         $envelope = $this->messageBus->dispatch($query);
-        $payload = $envelope->last(ResultStamp::class);
 
-        return ($payload instanceof Result)
-            ? $payload
+        $result = $envelope->last(QueryResultStamp::class);
+
+        return $result instanceof QueryResult
+            ? $result
             : throw new RuntimeException(
                 sprintf(
                     'The query "%s" processing did not return any results. Check if there is a suitable query handler with a return value of type "iterable"',

@@ -9,7 +9,7 @@ use Symfony\Component\Messenger\Middleware\MiddlewareInterface as Middleware;
 use Symfony\Component\Messenger\Middleware\StackInterface as Stack;
 use Symfony\Component\Messenger\Stamp\SentStamp;
 use Termyn\Cqrs\Command;
-use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
+use Termyn\Cqrs\Messaging\Messenger\Stamp\CommandResultStamp;
 use Termyn\DateTime\Clock;
 
 final readonly class AckSentCommandMiddleware implements Middleware
@@ -21,17 +21,15 @@ final readonly class AckSentCommandMiddleware implements Middleware
     ) {
     }
 
-    public function handle(
-        Envelope $envelope,
-        Stack $stack
-    ): Envelope {
+    public function handle(Envelope $envelope, Stack $stack): Envelope
+    {
         $envelope = $this->next($envelope, $stack);
 
         $message = $envelope->getMessage();
         if ($message instanceof Command) {
             $envelope = $envelope->last(SentStamp::class)
                 ? $envelope->with(
-                    ResultStamp::success(
+                    CommandResultStamp::sent(
                         id: $message->id(),
                         createdAt: $this->clock->measure()
                     )
