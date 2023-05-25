@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs;
 
-use Termyn\Id;
+use Termyn\DateTime\Instant;
 
 interface Message
 {
-    public function id(): Id;
+    public function publishedAt(): Instant;
 }
