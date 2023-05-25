@@ -11,10 +11,10 @@ use Termyn\Cqrs\Messaging\QueryBus;
 use Termyn\Cqrs\Messaging\Result;
 use Termyn\Cqrs\Query;
 
-final class SymfonyMessengerQueryBus implements QueryBus
+final readonly class SymfonyMessengerQueryBus implements QueryBus
 {
     public function __construct(
-        private readonly MessageBus $messageBus,
+        private MessageBus $messageBus,
     ) {
     }
 

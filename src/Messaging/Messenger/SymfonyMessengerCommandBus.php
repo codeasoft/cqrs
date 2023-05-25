@@ -11,10 +11,10 @@ use Termyn\Cqrs\Messaging\CommandBus;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Messaging\Result;
 
-final class SymfonyMessengerCommandBus implements CommandBus
+final readonly class SymfonyMessengerCommandBus implements CommandBus
 {
     public function __construct(
-        private readonly MessageBus $messageBus,
+        private MessageBus $messageBus,
     ) {
 
     }

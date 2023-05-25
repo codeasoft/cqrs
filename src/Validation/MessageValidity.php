@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Termyn\Cqrs\Validation;
 
-final class MessageValidity
+final readonly class MessageValidity
 {
-    public readonly array $errors;
+    public array $errors;
 
     public function __construct(
-        public readonly string $name,
+        public string $name,
         string ...$errors
     ) {
         $this->errors = $errors;

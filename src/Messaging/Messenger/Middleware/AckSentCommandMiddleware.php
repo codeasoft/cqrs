@@ -12,12 +12,12 @@ use Termyn\Cqrs\Command;
 use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\DateTime\Clock;
 
-final class AckSentCommandMiddleware implements Middleware
+final readonly class AckSentCommandMiddleware implements Middleware
 {
     use StackTrait;
 
     public function __construct(
-        private readonly Clock $clock,
+        private Clock $clock,
     ) {
     }
 

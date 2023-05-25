@@ -12,12 +12,12 @@ use Termyn\Cqrs\Messaging\Messenger\Stamp\ResultStamp;
 use Termyn\Cqrs\Query;
 use Termyn\DateTime\Clock;
 
-final class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
+final readonly class ResolveHandledQueryResultMiddleware implements MiddlewareInterface
 {
     use StackTrait;
 
     public function __construct(
-        private readonly Clock $clock,
+        private Clock $clock,
     ) {
     }
 
