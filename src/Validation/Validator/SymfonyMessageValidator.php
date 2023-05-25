@@ -10,10 +10,10 @@ use Termyn\Cqrs\Message;
 use Termyn\Cqrs\Validation\MessageValidator;
 use Termyn\Cqrs\Validation\MessageValidity;
 
-final class SymfonyMessageValidator implements MessageValidator
+final readonly class SymfonyMessageValidator implements MessageValidator
 {
     public function __construct(
-        private readonly SymfonyValidator $symfonyValidator,
+        private SymfonyValidator $symfonyValidator,
     ) {
     }
 
