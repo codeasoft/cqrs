@@ -29,6 +29,11 @@ abstract readonly class ResultStamp implements Result, Stamp
         return $this->messageStatus->isFailed();
     }
 
+    public function isInvalid(): bool
+    {
+        return $this->messageStatus->isInvalid();
+    }
+
     public function isRejected(): bool
     {
         return $this->messageStatus->isInvalid();

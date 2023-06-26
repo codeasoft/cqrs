@@ -12,6 +12,8 @@ interface Result
 
     public function isFailure(): bool;
 
+    public function isInvalid(): bool;
+
     public function hasErrors(): bool;
 
     public function errors(): iterable;
