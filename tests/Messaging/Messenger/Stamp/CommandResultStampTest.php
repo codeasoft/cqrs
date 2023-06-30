@@ -6,7 +6,7 @@ namespace Termyn\Cqrs\Test\Messaging\Messenger\Stamp;
 
 use Termyn\Cqrs\Messaging\Messenger\Stamp\CommandResultStamp;
 
-final class CommandResultStampTest extends ResultStampTest
+final class CommandResultStampTest extends ResultStampTestCase
 {
     public function testHandled(): void
     {
