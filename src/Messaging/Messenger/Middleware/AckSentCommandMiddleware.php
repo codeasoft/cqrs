@@ -14,6 +14,7 @@ use Termyn\DateTime\Clock;
 
 final readonly class AckSentCommandMiddleware implements Middleware
 {
+    use MetadataTrait;
     use StackTrait;
 
     public function __construct(
@@ -25,12 +26,14 @@ final readonly class AckSentCommandMiddleware implements Middleware
     {
         $envelope = $this->next($envelope, $stack);
 
+        $metadata = $this->getMetadata($envelope);
+
         $message = $envelope->getMessage();
         if ($message instanceof Command) {
             $envelope = $envelope->last(SentStamp::class)
                 ? $envelope->with(
                     CommandResultStamp::sent(
-                        id: $message->id(),
+                        id: $metadata->messageId,
                         createdAt: $this->clock->measure()
                     )
                 ) : $envelope;

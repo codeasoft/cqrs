@@ -14,6 +14,7 @@ use Termyn\DateTime\Clock;
 
 final readonly class ValidateCommandMiddleware implements Middleware
 {
+    use MetadataTrait;
     use StackTrait;
 
     public function __construct(
@@ -31,14 +32,15 @@ final readonly class ValidateCommandMiddleware implements Middleware
             return $this->next($envelope, $stack);
         }
 
-        $messageValidity = $this->messageValidator->validate($message);
+        $metadata = $this->getMetadata($envelope);
+        $validity = $this->messageValidator->validate($message);
 
-        return $messageValidity->isValid()
+        return $validity->isValid()
             ? $this->next($envelope, $stack)
             : $envelope->with(
                 CommandResultStamp::invalid(
-                    id: $message->id(),
-                    errors: $messageValidity->errors,
+                    id: $metadata->messageId,
+                    errors: $validity->errors,
                     createdAt: $this->clock->measure(),
                 )
             );
