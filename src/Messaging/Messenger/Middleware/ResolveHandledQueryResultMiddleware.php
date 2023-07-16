@@ -29,13 +29,12 @@ final readonly class ResolveHandledQueryResultMiddleware implements MiddlewareIn
         if ($message instanceof Query) {
             $payload = $envelope->last(HandledStamp::class)?->getResult();
 
-            $envelope = $payload
-                ? $envelope->with(
-                    QueryResultStamp::handled(
-                        payload: is_iterable($payload) ? $payload : [$payload],
-                        createdAt: $this->clock->measure(),
-                    )
-                ) : $envelope;
+            $envelope = $envelope->with(
+                QueryResultStamp::handled(
+                    payload: is_iterable($payload) ? $payload : [$payload],
+                    createdAt: $this->clock->measure(),
+                )
+            );
         }
 
         return $envelope;
